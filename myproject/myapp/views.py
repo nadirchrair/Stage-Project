@@ -13,15 +13,16 @@ def upload_document(request, id):
     form_submitted = False
     if request.method == 'POST':
         form = StageForm(request.POST)
+        critere = request.POST.get('critere')
+        critere_object = Critéres.objects.get(id = int(critere))
         document_form = DocumentForm(request.POST, request.FILES)
        # critérs_form = CritérsForm(request.POST)
-
+        print("omar" ,critere_object)
         if form.is_valid() and document_form.is_valid() :
             stage = form.save(commit=False)
+            stage.critérs = critere_object
             stage.save()
-
            # critérs = critérs_form.cleaned_data['critérs']
-
             for i in range(stage.nombre_document):
                 file = request.FILES.getlist('file')[i]
                # critérs = critérs_list[i].critérs if i < len(critérs_list) else None
@@ -36,8 +37,6 @@ def upload_document(request, id):
                     file=file
                 )
             form_submitted = True
-
-            
     else:
         form = StageForm()
         document_form = DocumentForm()
@@ -47,6 +46,7 @@ def upload_document(request, id):
         'document_form': document_form,
         #'critérs_form': critérs_form,
         'form_submitted': form_submitted,
+        'criteres':critérs_list
 
     }
     return render(request, 'upload_document.html', context)
@@ -56,10 +56,8 @@ def login_view(request):
         # Handle login form submission
         username = request.POST['username']
         password = request.POST['password']
-        
         # Authenticate user
         user = authenticate(request, username=username, password=password)
-        
         if user is not None and user.is_superuser:
             # Superuser login successful, perform login and redirect to a success page
             login(request, user)
