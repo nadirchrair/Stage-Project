@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var numberOfDocumentsInput = $('#id_nombre_document');
+
+            numberOfDocumentsInput.change(function () {
+                var numDocuments = $(this).val();
+                var fileInputsContainer = $('#file-inputs-container');
+                fileInputsContainer.empty();
+
+                for (var i = 0; i < numDocuments; i++) {
+                    var fileInput = $('<input type="file" name="file" class="form-control-file" multiple>');
+                    fileInputsContainer.append(fileInput);
+                }
+            });
+        });
+
+        // Check if the form was successfully submitted
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Upload Document</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div id="file-inputs-container">
+                <!-- File inputs will be dynamically added here -->
+            </div>
+
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+    {% if form_submitted %}
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Operation Success',
+                text: 'Your File is Uploaded',
+            });
+        });
+    </script>
+    {% endif %}
+
+
+</body>
+
+</html>
