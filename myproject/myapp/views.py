@@ -72,6 +72,20 @@ def login_view(request):
 
 def Adminhome(request):
     AllStatge= Stage.objects.all()
-    
-    return render(request,'AdminHome.html')
-    
+    context={
+        'AllStage':AllStatge,
+    }
+    return render(request,'AdminHome.html',context)
+def allFaculté(request):
+    fac= Faculté.objects.all()
+    context={
+        'allFaculté':fac,
+    }
+    return render(request,'AllFaculté.html',context)
+def allCri(request):
+    creters= Critéres.objects.all()
+    context={
+        'allCreter':creters,
+    }
+    return render(request,'AllCretiers.html',context)
+

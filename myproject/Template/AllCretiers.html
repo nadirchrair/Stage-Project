@@ -25,26 +25,16 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>nom et prenom</th>
-                    <th>date_de_naissance</th>
-                    <th>Grade</th>
+                    <th>nom_de_Grille</th>
                     <th>critérs</th>
-                    <th>nombre_document</th>
-                    <th>file</th>
-
                 </tr>
             </thead>
             <tbody>
-                {% for stage in AllStage %}
+                {% for creters in allCreter %}
                 <tr>
-                    <td>{{stage.nom}} {{stage.prenom}}</td>
-                    <td>{{stage.date_de_naissance}}</td>
-                    <td>{{stage.Grade}}</td>
-                    <td>{{stage.critérs}}</td>
-                    <td>{{stage.nombre_document}}</td>
-                    <td>
-                        <a href="{{stage.file.url}}" download>file</a>
-                    </td>
+                    <td>{{creters.nom_de_Grille}}</td>
+                    <td>{{creters.critérs}}</td>
+
                 </tr>
                 {% endfor %}
 
