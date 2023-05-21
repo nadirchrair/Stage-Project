@@ -25,36 +25,24 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>nom et prenom</th>
+                    <th>nom_faculté</th>
                     <th>date_de_naissance</th>
-                    <th>Grade</th>
-                    <th>critérs</th>
-                    <th>nombre_document</th>
-                    <th>file</th>
-
                 </tr>
             </thead>
             <tbody>
-                {% for stage in AllStage %}
+                {% for faculté in Allfaculté %}
                 <tr>
-                    <td>{{stage.nom}} {{stage.prenom}}</td>
-                    <td>{{stage.date_de_naissance}}</td>
-                    <td>{{stage.Grade}}</td>
-                    <td>{{stage.critérs}}</td>
-                    <td>{{stage.nombre_document}}</td>
+                    <td>{{stage.nom_faculté}}</td>
                     <td>
                         <a href="{{stage.file.url}}" download>file</a>
                     </td>
                 </tr>
                 {% endfor %}
-
-
             </tbody>
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

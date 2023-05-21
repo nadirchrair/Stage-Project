@@ -3,9 +3,6 @@ from django.db import models
 # Create your models here.
 class Type(models.Model):
     nom_de_Grille= models.CharField(max_length=50)
-
-    
-
     def __str__(self):
         return self.nom_de_Grille
 class Critéres(models.Model):
