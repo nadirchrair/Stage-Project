@@ -37,17 +37,20 @@
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
+            <div id="file-inputs-container">
+                <!-- File inputs will be dynamically added here -->
+            </div>
             <select name="critere" class="form-control">
                 <option>selectionnez critere</option>
                 {% for c in criteres %}
                 <option value="{{ c.id }}">{{ c }}</option>
                 {% endfor %}
             </select>
-            <div id="file-inputs-container">
-                <!-- File inputs will be dynamically added here -->
-            </div>
 
-            <button type="submit" class="btn btn-primary">Upload</button>
+
+            <button type="submit" class="btn btn-success mt-3 mb-3">Upload</button>
+            <a href="{% url 'home' %}" style="color:rgb(0, 0, 0)" class="ml-3 mt-5">Home</a>
+
         </form>
     </div>
     {% if form_submitted %}

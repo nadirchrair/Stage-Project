@@ -21,20 +21,20 @@
         </ul>
     </nav>
     <div class="container" style="margin-top: 120px;">
-        <h1 class="mt-5">All Stage</h1>
+        <a href="{% url 'addfaculté' %}" class=" mb-3 btn btn-success">Add Faculté</a>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>nom_faculté</th>
-                    <th>date_de_naissance</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for faculté in Allfaculté %}
+                {% for faculté in allFaculté %}
                 <tr>
-                    <td>{{stage.nom_faculté}}</td>
-                    <td>
-                        <a href="{{stage.file.url}}" download>file</a>
+                    <td>{{faculté.nom_faculté}}</td>
+                    <td><a href="{% url 'updatefaculté' faculté.id %}">Update</a>
+                        <a href="{% url 'deletefaculté' faculté.id %}" class="ml-4">delete</a>
                     </td>
                 </tr>
                 {% endfor %}

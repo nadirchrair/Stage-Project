@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="sweetalert2.all.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Upload Document</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+
+            <button type="submit" class="btn btn-success">Upload</button>
+            <a href="{% url 'critiers' %}" style="color:rgb(0, 0, 0)" >AllCritéres</a>
+        </form>
+    </div>
+    {% if form_submitted %}
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Operation Success',
+                text: 'Your critérs is Uploaded',
+            });
+        });
+    </script>
+    {% endif %}
+
+
+</body>
+
+</html>
