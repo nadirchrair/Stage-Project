@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from django.contrib.auth import authenticate, login
+from django.views import View
+from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .filters import StageFilter
 
 
 def home(request):
@@ -69,19 +74,25 @@ def login_view(request):
         # Render the login form
         return render(request, 'login.html')
 
-
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
 def Adminhome(request):
-    AllStatge= Stage.objects.all()
+    AllStatge = StageFilter(request.GET, queryset=Stage.objects.all())
+    
+
     context={
         'AllStage':AllStatge,
     }
     return render(request,'AdminHome.html',context)
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
 def allFaculté(request):
     fac= Faculté.objects.all()
     context={
         'allFaculté':fac,
     }
     return render(request,'AllFaculté.html',context)
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
 def allCri(request):
     creters= Critéres.objects.all()
     context={
@@ -89,3 +100,94 @@ def allCri(request):
     }
     return render(request,'AllCretiers.html',context)
 
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
+def uploadcritérs(request):
+    form_submitted = False
+    if request.method == 'POST':
+        form = CritéresForm(request.POST)
+       # critérs_form = CritérsForm(request.POST)
+       # print("omar" ,critere_object)
+        if form.is_valid():
+            form.save()
+            form_submitted = True
+            
+    else:
+        form = CritéresForm()
+
+    context = {
+        'form': form,
+        'form_submitted':form_submitted,
+       
+
+    }
+    return render(request, 'ADD/AddCréter.html', context)
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
+def uploadFaculté(request):
+    form_submitted = False
+    if request.method == 'POST':
+        form = FacultéForm(request.POST)
+       # critérs_form = CritérsForm(request.POST)
+       # print("omar" ,critere_object)
+        if form.is_valid():
+            form.save()
+            form_submitted = True
+            
+    else:
+        form = FacultéForm()
+
+    context = {
+        'form': form,
+        'form_submitted':form_submitted,
+       
+
+    }
+    return render(request, 'ADD/AddFaculté.html', context)
+
+#@login_required(login_url='login')  # Replace 'login' with your actual login URL
+@method_decorator(login_required(login_url='login'), name='dispatch')
+
+class FacultéUpdateView(View):
+    def get(self, request, pk):
+        item = get_object_or_404(Faculté, pk=pk)
+        form = FacultéForm(instance=item)
+        return render(request, 'update/faculté_update.html', {'form': form})
+
+    def post(self, request, pk):
+        item = get_object_or_404(Faculté, pk=pk)
+        form = FacultéForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('faculté')  # Replace 'item-list' with the appropriate URL name
+        return render(request, 'update/faculté_update.html', {'form': form})
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
+def delete(request, pk):
+        item = get_object_or_404(Faculté, pk=pk)
+        item.delete()
+        return redirect('faculté')
+
+#@login_required(login_url='login')  # Replace 'login' with your actual login URL
+@method_decorator(login_required(login_url='login'), name='dispatch')
+
+class CritéresUpdateView(View):
+    def get(self, request, pk):
+        item = get_object_or_404(Critéres, pk=pk)
+        form = CritéresForm(instance=item)
+        return render(request, 'update/Critéres_update.html', {'form': form})
+
+    def post(self, request, pk):
+        item = get_object_or_404(Critéres, pk=pk)
+        form = CritéresForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('critiers')  # Replace 'item-list' with the appropriate URL name
+        return render(request, 'update/Critéres_update.html', {'form': form})
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+
+def deleteCre(request, pk):
+        item = get_object_or_404(Critéres, pk=pk)
+        item.delete()
+        return redirect('critiers')
+    
