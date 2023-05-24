@@ -47,7 +47,14 @@
                     <td>{{stage.critérs}}</td>
                     <td>{{stage.nombre_document}}</td>
                     <td>
+
+                        {% if stage.file %}
                         <a href="{{stage.file.url}}" download>file</a>
+                        {% else %}
+                        <a>file</a>
+
+                        {% endif %}
+
                     </td>
                 </tr>
                 {% endfor %}
