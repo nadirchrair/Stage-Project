@@ -18,17 +18,13 @@
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <select name="critere" class="form-control">
+            <select name="stage" class="form-control">
                 <option>selectionnez critere</option>
-                {% for c in criteres %}
-                <option value="{{ c.id }}">{{ c }}</option>
-                {% endfor %}
+                <option value="{{ stage.id }}">{{ stage }}</option>
             </select>
 
-
-            <button type="submit" class="btn btn-success mt-3 mb-3">Upload</button>
-            <a href="{% url 'home' %}" style="color:rgb(0, 0, 0)" class="ml-3 mt-5">Home</a>
-
+            <button type="submit" class="btn btn-success">Upload</button>
+            <a href="{% url 'success' %}" style="color:rgb(0, 0, 0)">AllStage</a>
         </form>
     </div>
     {% if form_submitted %}
@@ -37,7 +33,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Operation Success',
-                text: 'Your File is Uploaded',
+                text: 'Your critérs is Uploaded',
             });
         });
     </script>

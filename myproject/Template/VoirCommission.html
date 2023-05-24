@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Table with Bootstrap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+
+</head>
+
+<body>
+    <nav>
+        <img src="{% static './images/logouniv.jpeg' %}">
+
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'faculté' %}">Faculté</a></li>
+            <li><a href="{% url 'critiers' %}">Critérs</a></li>
+            <li><a href="{% url 'success' %}">Stage</a></li>
+        </ul>
+    </nav>
+    <div class="container" style="margin-top: 120px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>stage</th>
+                    <th>total_finale</th>
+                    <th>remarque</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comm in comm %}
+                <tr>
+                    <td>{{comm.stage}}</td>
+                    <td>{{comm.total_finale}}</td>
+                    <td>{{comm.remarque}}</td>
+
+                </tr>
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

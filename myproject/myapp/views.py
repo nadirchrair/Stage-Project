@@ -17,45 +17,26 @@ def upload_document(request, id):
     critérs_list = Critéres.objects.filter(nom_de_Grille=grade)
     form_submitted = False
     if request.method == 'POST':
-        form = StageForm(request.POST)
+        form = StageForm(request.POST,request.FILES)
         critere = request.POST.get('critere')
         critere_object = Critéres.objects.get(id = int(critere))
-        document_form = DocumentForm(request.POST, request.FILES)
+#        document_form = DocumentForm(request.POST, )
        # critérs_form = CritérsForm(request.POST)
         print("omar" ,critere_object)
-        if form.is_valid() and document_form.is_valid() :
+        if form.is_valid()  :
             stage = form.save(commit=False)
             stage.critérs = critere_object
             stage.save()
-           # critérs = critérs_form.cleaned_data['critérs']
-            for i in range(stage.nombre_document):
-                file = request.FILES.getlist('file')[i]
-               # critérs = critérs_list[i].critérs if i < len(critérs_list) else None
-                Stage.objects.create(
-                    faculté=stage.faculté,
-                    nom=stage.nom,
-                    prenom=stage.prenom,
-                    date_de_naissance=stage.date_de_naissance,
-                    Grade=stage.Grade,
-                    critérs=stage.critérs,
-                    nombre_document=stage.nombre_document,
-                    file=file
-                )
             form_submitted = True
     else:
         form = StageForm()
-        document_form = DocumentForm()
-
     context = {
         'form': form,
-        'document_form': document_form,
         #'critérs_form': critérs_form,
         'form_submitted': form_submitted,
         'criteres':critérs_list
-
     }
     return render(request, 'upload_document.html', context)
-
 def login_view(request):
     if request.method == 'POST':
         # Handle login form submission
@@ -190,4 +171,35 @@ def deleteCre(request, pk):
         item = get_object_or_404(Critéres, pk=pk)
         item.delete()
         return redirect('critiers')
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+def addCommission(request,pk):
+    stage_obj=Stage.objects.get(pk=pk)
+    form_submitted = False
+    if request.method == 'POST':
+        form = CommissionForm(request.POST)
+        stage=request.POST.get('stage')
+       # critérs_form = CritérsForm(request.POST)
+       # print("omar" ,critere_object)
+        if form.is_valid():
+            x=  form.save(commit=False)
+            x.stage=stage_obj
+            x.save()
+            form_submitted = True
+    else:
+        form = CommissionForm()
+    context = {
+        'form': form,
+        'form_submitted':form_submitted,
+        'stage':stage_obj
+    }
+    return render(request, 'ADD/AddCommission.html', context)
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+def voirCommission(request,pk):
+    commision = Commission.objects.filter(stage_id=pk)
+    print(commision)
+    
+        
+        
+    return render(request, 'VoirCommission.html', {'comm':commision})
+
     
