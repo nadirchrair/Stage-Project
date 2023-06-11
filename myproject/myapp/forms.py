@@ -4,7 +4,7 @@ class StageForm(forms.ModelForm):
     class Meta:
         model = Stage
         fields = '__all__'
-        exclude=('critérs',)
+        exclude=('critérs','nombre_document')
         widgets = {
             'faculté': forms.Select(attrs={'class': 'form-control'}),
             'nom': forms.TextInput(attrs={'class': 'form-control'}),
@@ -15,10 +15,11 @@ class StageForm(forms.ModelForm):
             'payes_Destiné': forms.TextInput(attrs={'class': 'form-control'}),
             'ville': forms.TextInput(attrs={'class': 'form-control'}),
             'labo_de_rechercher': forms.TextInput(attrs={'class': 'form-control'}),
+            'file': forms.FileInput(attrs={'class': 'form-control'}),
             'dossier_construction': forms.FileInput(attrs={'class': 'form-control'}),
            # 'labo_de_rechercher': forms.TextInput(attrs={'class': 'form-control'}),
 
-            'nombre_document': forms.NumberInput(attrs={'class': 'form-control'}),
+#            'nombre_document': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
 

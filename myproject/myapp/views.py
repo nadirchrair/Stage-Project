@@ -8,10 +8,93 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .filters import StageFilter
 
+def upload_docs(request):
+    critérs_list = Critéres.objects.all()
+    form_submitted = False
 
+    if request.method == 'POST':
+        form = StageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            stage = form.save(commit=False)
+            #stage.save()
+
+            for critere in critérs_list:
+                nombre_document = request.POST.get('nombre_' + str(critere.id))
+                x = Stage.objects.create(
+                    faculté=stage.faculté,
+                    nom=stage.nom,
+                    prenom=stage.prenom,
+                    date_de_naissance=stage.date_de_naissance,
+                    Grade=stage.Grade,
+                    payes_Destiné=stage.payes_Destiné,
+                    ville=stage.ville,
+                    labo_de_rechercher=stage.labo_de_rechercher,
+                    critérs=critere,
+                    nombre_document=nombre_document,
+                    file=stage.file,
+                    dossier_construction=stage.dossier_construction
+                )
+                x.save()
+
+            form_submitted = True
+    else:
+        form = StageForm()
+
+    context = {
+        'form': form,
+        'form_submitted': form_submitted,
+        'criteres': critérs_list
+    }
+    return render(request, 'ADD/up.html', context)
+
+
+def upload_doc(request, id):
+    grade = Type.objects.get(id=id)
+    critérs_list = Critéres.objects.filter(nom_de_Grille=grade)
+    form_submitted = False
+
+    if request.method == 'POST':
+        form = StageForm(request.POST, request.FILES)
+        critere_ids = request.POST.getlist('critere')
+        nombre_documents = request.POST.getlist('nombre')
+
+        if form.is_valid():
+            stage = form.save(commit=False)
+
+            for critere_id, nombre_document in zip(critere_ids, nombre_documents):
+                critere_object = Critéres.objects.get(id=int(critere_id))
+                x = Stage.objects.create(
+                    faculté=stage.faculté,
+                    nom=stage.nom,
+                    prenom=stage.prenom,
+                    date_de_naissance=stage.date_de_naissance,
+                    Grade=stage.Grade,
+                    payes_Destiné=stage.payes_Destiné,
+                    ville=stage.ville,
+                    labo_de_rechercher=stage.labo_de_rechercher,
+                    critérs=critere_object,
+                    nombre_document=nombre_document,
+                    file=stage.file,
+                    dossier_construction=stage.dossier_construction
+                )
+                x.save()
+
+            form_submitted = True
+    else:
+        form = StageForm()
+
+    context = {
+        'form': form,
+        'form_submitted': form_submitted,
+        'criteres': critérs_list
+    }
+    return render(request, 'ADD/add.html', context)
+######################""""
 def home(request):
     type=Type.objects.all()
     return render(request,'Home.html',{'type':type})
+
 def upload_document(request, id):
     grade = Type.objects.get(id=id)
     critérs_list = Critéres.objects.filter(nom_de_Grille=grade)
@@ -37,6 +120,7 @@ def upload_document(request, id):
         'criteres':critérs_list
     }
     return render(request, 'upload_document.html', context)
+
 def login_view(request):
     if request.method == 'POST':
         # Handle login form submission

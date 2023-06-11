@@ -18,6 +18,9 @@ urlpatterns = [
     path('AllFaculté/delete/<int:pk>/', views.delete, name='deletefaculté'),
     path('AllCretiers/update/<int:pk>/', CritéresUpdateView.as_view(), name='updatecreters'),
     path('AllCretiers/delete/<int:pk>/', views.deleteCre, name='deletecreters'),
+    path('upload-docs/', upload_docs, name='upload_docs'),
+    path('up/<int:id>', upload_doc, name='upload'),
+
 
 
 

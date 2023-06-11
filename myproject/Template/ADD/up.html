@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Upload Document</h1>
+        <form method="post" action="{% url 'upload_docs' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% for critere in criteres %}
+            <div class="form-group">
+                <label for="id_nombre_{{ critere.id }}">Number of Documents for {{ critere }}</label>
+                <input type="text" name="nombre_{{ critere.id }}" id="id_nombre_{{ critere.id }}" class="form-control">
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success mt-3 mb-3">Upload</button>
+            <a href="{% url 'home' %}" style="color:rgb(0, 0, 0)" class="ml-3 mt-5">Home</a>
+        </form>
+
+        <h2 class="mt-5">Criteria Table</h2>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Criterion</th>
+                    <th>Notes</th>
+                    <th>Number of Documents</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for criterion in criteres %}
+                <tr>
+                    <td>{{ criterion.critérs }}</td>
+                    <td>{{ criterion.points }}</td>
+                    <td><input type="text" name="nombre_{{ criterion.id }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if form_submitted %}
+    <script>
+        alert("Your File is Uploaded");
+    </script>
+    {% endif %}
+</body>
+
+</html>
