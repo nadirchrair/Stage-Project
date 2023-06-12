@@ -5,7 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('',views.home, name='home'),
-    path('upload/<int:id>',views.upload_document, name='upload_docs'),
+    #path('upload/<int:id>',views.upload_document, name='upload_docs'),
     path('homeAdmin/',views.Adminhome, name='success'),
     path('homeAdmin/Add/<int:pk>/', views.addCommission, name='add'),
     path('homeAdmin/Vu/<str:pk>/', views.voirCommission, name='voir'),
@@ -18,8 +18,8 @@ urlpatterns = [
     path('AllFaculté/delete/<int:pk>/', views.delete, name='deletefaculté'),
     path('AllCretiers/update/<int:pk>/', CritéresUpdateView.as_view(), name='updatecreters'),
     path('AllCretiers/delete/<int:pk>/', views.deleteCre, name='deletecreters'),
-    path('upload-docs/', upload_docs, name='upload_docs'),
-    path('up/<int:id>', upload_doc, name='upload'),
+   # path('upload-docs/', upload_docs, name='upload_docs'),
+    path('add-docs/<int:id>', upload_doc, name='upload_docs'),
 
 
 
