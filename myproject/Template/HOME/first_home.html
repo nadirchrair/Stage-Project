@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Full Page Image</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .explore-button {
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px 30px;
+            background-color: #151313;
+            color: #fdf9f9;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="{% static 'images/home.png' %}" alt="Your Image">
+        <button class="explore-button"> <a href="{% url 'home'  %}" style="text-decoration: none; color:#fdf9f9">
+                Explore
+            </a></button>
+    </div>
+</body>
+
+</html>

@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .filters import StageFilter
 
+
+def home_principle(request):
+        return render(request, 'HOME/first_home.html')
+
+    
+
 def upload_docs(request):
     critérs_list = Critéres.objects.all()
     form_submitted = False
@@ -131,7 +137,7 @@ def login_view(request):
         if user is not None and user.is_superuser:
             # Superuser login successful, perform login and redirect to a success page
             login(request, user)
-            return redirect('success')
+            return redirect('homeadd')
         else:
             # Authentication failed, show an error message
             return render(request, 'login.html', {'error': 'Invalid credentials'})

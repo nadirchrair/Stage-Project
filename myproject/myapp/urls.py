@@ -4,7 +4,8 @@ from .views import login_view
 from .views import *
 
 urlpatterns = [
-    path('',views.home, name='home'),
+    path('',views.home_principle, name='home_general'),
+    path('home/',views.home, name='home'),
     #path('upload/<int:id>',views.upload_document, name='upload_docs'),
     path('homeAdmin/',views.Adminhome, name='success'),
     path('homeAdmin/Add/<int:pk>/', views.addCommission, name='add'),
