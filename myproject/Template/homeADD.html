@@ -6,47 +6,43 @@
     <title>Table with Bootstrap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static './css/style.css' %}">
-
 </head>
 
 <body>
     <nav>
         <img src="{% static './images/logouniv.jpeg' %}">
-
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'faculté' %}">Faculté</a></li>
             <li><a href="{% url 'critiers' %}">Critérs</a></li>
-            <li><a href="{% url 'success' %}">Stage</a></li>
+            <li><a href="{% url 'homeadd' %}">Stage</a></li>
             <li><a href="{% url 'logout' %}">logout</a></li>
         </ul>
     </nav>
-    <div class="container" style="margin-top: 120px;">
-        <table class="table table-striped">
+    <div class=" " style="margin-top: 120px;">
+        <table class="table table-striped mt-5">
             <thead>
                 <tr>
-                    <th>stage</th>
-                    <th>total_finale</th>
-                    <th>remarque</th>
+                    <th>Nome et Prenom</th>
+                    <th>Number of Entries</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for comm in comm %}
+                {% for entry in unique_names %}
                 <tr>
-                    <td>{{comm.stage}}</td>
-                    <td>{{comm.total_finale}}</td>
-                    <td>{{comm.remarque}}</td>
-
+                    <td style="font-size: 20px; color:black">{{ entry.nom }} {{ entry.prenom }}</td>
+                    <td>{{ entry.num_entries }}</td>
+                    <td>
+                        <a href="{% url 'show_details' entry.nom %}" class="btn btn-success">Show Details</a>
+                    </td>
                 </tr>
                 {% endfor %}
-
-
             </tbody>
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

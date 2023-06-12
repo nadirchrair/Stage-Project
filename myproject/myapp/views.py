@@ -138,6 +138,14 @@ def login_view(request):
     else:
         # Render the login form
         return render(request, 'login.html')
+from django.db.models import Count
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+def Homeadmin(request):
+    unique_names = Stage.objects.values('nom','prenom').annotate(num_entries=Count('nom'))
+    context = {
+        'unique_names': unique_names,
+    }
+    return render(request, 'homeADD.html', context)
 
 @login_required(login_url='login')  # Replace 'login' with your actual login URL
 def Adminhome(request):
@@ -287,3 +295,16 @@ def voirCommission(request,pk):
     return render(request, 'VoirCommission.html', {'comm':commision})
 
     
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)
+    return redirect('login') 
+@login_required(login_url='login')  # Replace 'login' with your actual login URL
+def show_details(request, name):
+    stages = Stage.objects.filter(nom=name)
+    context = {
+        'stages': stages,
+    }
+    return render(request, 'show_details.html', context)

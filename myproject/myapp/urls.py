@@ -20,6 +20,9 @@ urlpatterns = [
     path('AllCretiers/delete/<int:pk>/', views.deleteCre, name='deletecreters'),
    # path('upload-docs/', upload_docs, name='upload_docs'),
     path('add-docs/<int:id>', upload_doc, name='upload_docs'),
+    path('logout/', logout_view, name='logout'),
+    path('home-admin/', Homeadmin, name='homeadd'),
+    path('show_details/<str:name>/', show_details, name='show_details'),
 
 
 
