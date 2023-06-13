@@ -24,7 +24,6 @@ class Stage(models.Model):
     CHOICE_A = 'Professeur'
     CHOICE_B = 'Maitre de conférences - classe A'
     CHOICE_C = 'Doctoras Régime LMD'
-
     CHOICES = [
         (CHOICE_A, 'Professeur'),
         (CHOICE_B, 'Maitre de conférences - classe A'),
@@ -54,3 +53,5 @@ class Commission(models.Model):
     remarque = models.TextField()
     def __str__(self):
         return f"{self.stage} {self.total_finale}"
+class Myfinal(models.Model):
+    datetime_field = models.DateTimeField()

@@ -7,10 +7,22 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .filters import StageFilter
-
+from datetime import datetime
+from django.utils import timezone
 
 def home_principle(request):
-        return render(request, 'HOME/first_home.html')
+     current_datetime = timezone.now()
+     specific_datetime = Myfinal.objects.first().datetime_field
+     print('specific_datetime',specific_datetime)
+     print('current_datetime',current_datetime)
+     
+     if current_datetime <= specific_datetime:
+        print('yessssssss')
+        # Do something when datetime matches
+        return render(request, 'NOcontent.html', {'content': 'No content'})
+     else :
+             
+       return render(request, 'HOME/first_home.html')
 
     
 
