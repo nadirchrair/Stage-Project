@@ -52,10 +52,13 @@
                         <td>{{stage.labo_de_rechercher}}</td>
                         <td>{{stage.total}}</td>
                         <td>
+                            {% if forloop.first %} <!-- Check if it's the first iteration -->
                             <a href="{{stage.dossier_construction.url}}" download>dossier</a>
+                            {% endif %}
                         </td>
                         <td>
-                            {% if stage.file %}
+                            {% if forloop.first and stage.file %}
+                            <!-- Check if it's the first iteration and stage.file exists -->
                             <a href="{{stage.file.url}}" download>file</a>
                             {% else %}
                             <a>file</a>
