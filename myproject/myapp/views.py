@@ -16,7 +16,7 @@ def home_principle(request):
      print('specific_datetime',specific_datetime)
      print('current_datetime',current_datetime)
      
-     if current_datetime <= specific_datetime:
+     if current_datetime >= specific_datetime:
         print('yessssssss')
         # Do something when datetime matches
         return render(request, 'NOcontent.html', {'content': 'No content'})
