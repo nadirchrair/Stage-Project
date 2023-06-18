@@ -156,6 +156,9 @@ def login_view(request):
     else:
         # Render the login form
         return render(request, 'login.html')
+
+
+
 from django.db.models import Count
 @login_required(login_url='login')  # Replace 'login' with your actual login URL
 def Homeadmin(request):

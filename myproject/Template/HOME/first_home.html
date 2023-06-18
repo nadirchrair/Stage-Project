@@ -23,24 +23,25 @@
         img {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 10%;
+            width: 80%;
             height: 100%;
             object-fit: cover;
         }
 
         .explore-button {
             position: absolute;
-            bottom: 200px;
+            bottom: 0px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 20px 30px;
-            background-color: #28a745;
+            padding: 20px 80px;
+            background-color: rgb(50, 156, 184);
             color: #fff;
             font-size: 20px;
             border: none;
             cursor: pointer;
             border-radius: 10px;
+
         }
 
         .explore-button:hover a {
@@ -53,9 +54,10 @@
 
 <body>
     <div class="container">
-        <img src="{% static 'images/home.png' %}" alt="Your Image">
+        <img src="{% static 'images/Capture d’écran (357).png' %}" alt="Your Image">
         <button class="explore-button"> <a href="{% url 'home'  %}" style="text-decoration: none; color:#fdf9f9">
-                Explore
+                تقديم ملف الحركية القصيرة بالخارج
+
             </a></button>
     </div>
 </body>
