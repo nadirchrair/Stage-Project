@@ -328,4 +328,18 @@ def show_details(request, name):
     context = {
         'stages': stages,
     }
+
     return render(request, 'show_details.html', context)
+
+######################Testing
+def test(request):
+    if request.method == 'POST':
+        input_value = request.POST.get('input_field')
+        
+        if input_value == 'STAGE2023':
+            return redirect('home')
+        else:
+            error_message = 'Error: Invalid input!'
+            return render(request, 'error.html', {'error_message': error_message})
+    
+    return render(request, 'Testing.html')

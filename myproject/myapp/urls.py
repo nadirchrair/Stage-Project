@@ -24,6 +24,8 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('home-admin/', Homeadmin, name='homeadd'),
     path('show_details/<str:name>/', show_details, name='show_details'),
+    path('testing/', test, name='test'),
+    
 
 
 

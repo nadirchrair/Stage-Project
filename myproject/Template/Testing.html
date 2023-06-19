@@ -29,24 +29,19 @@
             object-fit: cover;
         }
 
-        .explore-button {
+        input {
             position: absolute;
-            bottom: 0px;
+            bottom: 200px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 20px 80px;
+            width: 40%;
+            height: 10%;
             background-color: rgb(50, 156, 184);
-            color: #fff;
+            color: #000000;
             font-size: 20px;
             border: none;
             cursor: pointer;
             border-radius: 10px;
-
-        }
-
-        .explore-button:hover a {
-
-            font-size: 30px;
 
         }
     </style>
@@ -55,10 +50,16 @@
 <body>
     <div class="container">
         <img src="{% static 'images/Capture d’écran (357).png' %}" alt="Your Image">
-        <button class="explore-button"> <a href="{% url 'test'  %}" style="text-decoration: none; color:#fdf9f9">
-                تقديم ملف الحركية القصيرة بالخارج
 
-            </a></button>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="inputField">Enter input:</label>
+            <input type="password" name="input_field" id="inputField" placeholder="entre le code ">
+            <button type="submit">Submit</button>
+        </form>
+
+
     </div>
 </body>
 
