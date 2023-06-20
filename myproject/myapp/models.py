@@ -22,12 +22,19 @@ class Faculté(models.Model):
     
 class Stage(models.Model):
     CHOICE_A = 'Professeur'
-    CHOICE_B = 'Maitre de conférences - classe A'
-    CHOICE_C = 'Doctoras Régime LMD'
+    CHOICE_B = 'MCA'
+    CHOICE_C = 'MCB'
+    CHOICE_D = 'MAA'
+    CHOICE_E = 'MAB'
+    CHOICE_F = 'doctorats régime LMD'
+
     CHOICES = [
         (CHOICE_A, 'Professeur'),
-        (CHOICE_B, 'Maitre de conférences - classe A'),
-        (CHOICE_C, 'Doctoras Régime LMD'),
+        (CHOICE_B, 'MCA'),
+        (CHOICE_C, 'MCB'),
+        (CHOICE_D, 'MAA'),
+        (CHOICE_E, 'MAB'),
+        (CHOICE_F, 'doctorats régime LMD'),
     ]
     faculté=models.ForeignKey(Faculté, on_delete=models.CASCADE)
     nom = models.CharField(max_length=100)
