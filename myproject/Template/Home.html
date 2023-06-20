@@ -24,7 +24,7 @@
             background-color: rgb(50, 156, 184) !important;
             color: #fff !important;
             width: 250px;
-            height: 50px;
+            height: 60px;
         }
     </style>
 </head>
@@ -36,16 +36,19 @@
         <div class="row ml-5" style="margin-top: 400px;">
             <div class="col-md-6">
 
-                <h5 class="card-title">{{ type.0 }}</h5>
-                <a href="{% url 'upload_docs' type.0.id %}" class="btn btn-success">Remplir formulaire</a>
+                <h5 class="card-title"></h5>
+                <a href="{% url 'upload_docs' type.0.id %}" class="btn btn-success">أستاذ التعليم العالي/ أستاذ محاضر أ
+                    /أستاذ محاضر ب
+                </a>
 
             </div>
 
             <div class="col-md-3 " style="margin-left: 250px;">
                 {% if type.1 %}
 
-                <h5 class="card-title">{{ type.1 }}</h5>
-                <a href="{% url 'upload_docs' type.1.id %}" class="btn btn">Remplir formulaire</a>
+                <h5 class="card-title"></h5>
+                <a href="{% url 'upload_docs' type.1.id %}" class="btn btn">أستاذ مساعد
+                </a>
 
                 {% endif %}
             </div>
@@ -54,8 +57,9 @@
             <div class="col-md-3" style="margin-left: 380px;">
                 {% if type.2 %}
 
-                <h5 class="card-title">{{ type.2 }}</h5>
-                <a href="{% url 'upload_docs' type.2.id %}" class="btn btn-success">Remplir formulaire</a>
+                <h5 class="card-title"></h5>
+                <a href="{% url 'upload_docs' type.2.id %}" class="btn btn-success">طلبة الدكتوراه
+                </a>
 
                 {% endif %}
             </div>
