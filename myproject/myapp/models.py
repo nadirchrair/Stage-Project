@@ -27,6 +27,7 @@ class Stage(models.Model):
     CHOICE_D = 'MAA'
     CHOICE_E = 'MAB'
     CHOICE_F = 'doctorats régime LMD'
+    CHOICE_G = 'doctorats Science'
 
     CHOICES = [
         (CHOICE_A, 'Professeur'),
@@ -35,8 +36,10 @@ class Stage(models.Model):
         (CHOICE_D, 'MAA'),
         (CHOICE_E, 'MAB'),
         (CHOICE_F, 'doctorats régime LMD'),
+        (CHOICE_G , 'doctorats Science'),
     ]
     faculté=models.ForeignKey(Faculté, on_delete=models.CASCADE)
+    #depatement = models.CharField(max_length=50)
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
     date_de_naissance = models.DateField()
