@@ -16,10 +16,10 @@ def home_principle(request):
      print('specific_datetime',specific_datetime)
      print('current_datetime',current_datetime)
      
-     if current_datetime >= specific_datetime:
+     if current_datetime <= specific_datetime:
         print('yessssssss')
         # Do something when datetime matches
-        return render(request, 'NOcontent.html', {'content': 'No content'})
+        return render(request, 'NOcontent.html', {'content': 'Delie expére'})
      else :
              
        return render(request, 'HOME/first_home.html')
@@ -68,11 +68,20 @@ def upload_docs(request):
 
 
 def upload_doc(request, id):
-    grade = Type.objects.get(id=id)
-    critérs_list = Critéres.objects.filter(nom_de_Grille=grade)
-    form_submitted = False
+    current_datetime = timezone.now()
+    specific_datetime = Myfinal.objects.first().datetime_field  
+    if current_datetime <= specific_datetime:
+        print('yessssssss')
+        # Do something when datetime matches
+        return render(request, 'NOcontent.html', {'content': 'No content'})
+    else :
+             
+       
+      grade = Type.objects.get(id=id)
+      critérs_list = Critéres.objects.filter(nom_de_Grille=grade)
+      form_submitted = False
 
-    if request.method == 'POST':
+      if request.method == 'POST':
         form = StageForm(request.POST, request.FILES)
         critere_ids = request.POST.getlist('critere')
         nombre_documents = request.POST.getlist('nombre')
@@ -99,15 +108,15 @@ def upload_doc(request, id):
                 x.save()
 
             form_submitted = True
-    else:
+      else:
         form = StageForm()
 
-    context = {
+      context = {
         'form': form,
         'form_submitted': form_submitted,
         'criteres': critérs_list
     }
-    return render(request, 'ADD/add.html', context)
+      return render(request, 'ADD/add.html', context)
 ######################""""
 def home(request):
     type=Type.objects.all()
@@ -336,7 +345,7 @@ def test(request):
     if request.method == 'POST':
         input_value = request.POST.get('input_field')
         
-        if input_value == 'STAGE2023':
+        if input_value == 'FSESTAGE2023':
             return redirect('home')
         else:
             error_message = 'Error: Invalid input!'
